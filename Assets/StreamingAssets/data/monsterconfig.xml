@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<monsters>
+	<monster id="100100" MaxHP="500" Atk="50" Level="1" AI="0" MoveSpeed="2" AtkSpeed="1000" AtkRange="8" AtkSpace="4000" DefenseRange="4" born="false" perfab="Fire Archer" bullet="vfx_arrow_bullet" name="弓箭手I" />
+	<monster id="100200" MaxHP="1000" Atk="125" Level="1" AI="1" MoveSpeed="2" AtkSpeed="1000" AtkRange="3" AtkSpace="200" DefenseRange="1" born="false" perfab="Fire Knight" bullet="" name="战士I" />
+	<monster id="100300" MaxHP="600" Atk="50" Level="1" AI="0" MoveSpeed="2" AtkSpeed="1000" AtkRange="12" AtkSpace="200" DefenseRange="4" born="false" perfab="Fire Wizzard" bullet="vfx_moony_red" name="法师I" />
+	<monster id="100400" MaxHP="500" Atk="50" Level="1" AI="0" MoveSpeed="2" AtkSpeed="1000" AtkRange="12" AtkSpace="200" DefenseRange="4" born="false" perfab="Frost Archer" bullet="vfx_arrow_bullet" name="弓箭手II" />
+	<monster id="100500" MaxHP="1000" Atk="150" Level="1" AI="1" MoveSpeed="2" AtkSpeed="1000" AtkRange="3" AtkSpace="200" DefenseRange="1" born="false" perfab="Frost Knight" bullet="" name="战士II" />
+	<monster id="100600" MaxHP="600" Atk="50" Level="1" AI="0" MoveSpeed="1" AtkSpeed="1000" AtkRange="12" AtkSpace="200" DefenseRange="4" born="false" perfab="Frost Wizzard" bullet="vfx_moony_green" name="法师II" />
+	<monster id="100700" MaxHP="500" Atk="100" Level="1" AI="1" MoveSpeed="2" AtkSpeed="1000" AtkRange="2" AtkSpace="200" DefenseRange="4" born="false" perfab="Fallen Guardian" bullet="vfx_arrow_bullet" name="弓箭手I" />
+	<monster id="100800" MaxHP="1000" Atk="50" Level="0" AI="1" MoveSpeed="1" AtkSpeed="1000" AtkRange="3" AtkSpace="200" DefenseRange="1" born="false" perfab="Fire Mage" bullet="" name="战士I" />
+	<monster id="100900" MaxHP="6000" Atk="500" Level="0" AI="2" MoveSpeed="2" AtkSpeed="2000" AtkRange="7" AtkSpace="200" DefenseRange="4" born="false" perfab="Forest Golem" bullet="vfx_moony_red" name="法师I" />
+	<monster id="101000" MaxHP="500" Atk="50" Level="1" AI="1" MoveSpeed="2" AtkSpeed="1000" AtkRange="2" AtkSpace="200" DefenseRange="4" born="false" perfab="Masked Kobold" bullet="vfx_arrow_bullet" name="弓箭手II" />
+	<monster id="101100" MaxHP="1000" Atk="50" Level="1" AI="1" MoveSpeed="1" AtkSpeed="1000" AtkRange="2" AtkSpace="200" DefenseRange="1" born="true" perfab="Swordsman" bullet="" name="战士II" />
+	<monster id="110000" MaxHP="600" Atk="50" Level="1" AI="10" MoveSpeed="1" AtkSpeed="1000" AtkRange="12" AtkSpace="200" DefenseRange="4" born="false" perfab="robot-01" bullet="vfx_missile" name="精灵" />
+</monsters>

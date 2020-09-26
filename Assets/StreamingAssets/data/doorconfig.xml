@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<monsters>
+	<monster id="1" condition1="1" codition1param1="1000" codition1param2="1" condition2="0" codition2param1="2" codition2param2="200" />
+	<monster id="2" condition1="1" codition1param1="1000" codition1param2="1" condition2="0" codition2param1="2" codition2param2="200" />
+	<monster id="3" condition1="1" codition1param1="1000" codition1param2="1" condition2="0" codition2param1="2" codition2param2="200" />
+	<monster id="4" condition1="1" codition1param1="1000" codition1param2="1" condition2="0" codition2param1="2" codition2param2="200" />
+</monsters>

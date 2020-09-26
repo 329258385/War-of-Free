@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<windows>
+	<item id="1" Name="citywindow" Prefab="Prefabs/ui/citywindow" HideWithDestroy="1" />
+	<item id="2" Name="LoadingWindow" Prefab="Prefabs/ui/LoadingWindow" HideWithDestroy="1" />
+	<item id="3" Name="QuestWindow" Prefab="Prefabs/ui/QuestWindow" HideWithDestroy="1" />
+	<item id="4" Name="ResultWindow" Prefab="Prefabs/ui/ResultWindow" HideWithDestroy="1" />
+	<item id="4" Name="UnLockLevelWindow" Prefab="Prefabs/ui/UnLockLevelWindow" HideWithDestroy="1" />
+</windows>

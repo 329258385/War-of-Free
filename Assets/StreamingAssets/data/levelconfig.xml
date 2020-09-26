@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<levels>
+	<item level="1" chapter="1001" spawns="3" spawnNum="2" space="2" layout="0" monsters="100200,100200,100200" />
+	<item level="2" chapter="1001" spawns="3" spawnNum="2" space="2" layout="0" monsters="100400,100500,100600,100300" />
+	<item level="3" chapter="1001" spawns="3" spawnNum="2" space="2" layout="0" monsters="100400,100100,100200,100500" />
+	<item level="4" chapter="1001" spawns="3" spawnNum="2" space="2" layout="0" monsters="100100,100200,100100,100300" />
+	<item level="5" chapter="1001" spawns="3" spawnNum="2" space="2" layout="0" monsters="100200,100200,100200,100300" />
+</levels>

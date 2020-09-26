@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<quests>
+	<quest id="100101" chapter="1001" next="100102" condition1="0" codition1param1="0" codition1param2="8" name="任务1" desc="收集道具通关" />
+	<quest id="100102" chapter="1001" next="100103" condition1="1" codition1param1="0" codition1param2="8" name="任务2" desc="击杀怪物通关" />
+	<quest id="100103" chapter="1001" next="100104" condition1="2" codition1param1="0" codition1param2="8" name="任务3" desc="坚持多长时间通关" />
+	<quest id="100104" chapter="1001" next="0" condition1="1" codition1param1="0" codition1param2="8" name="任务4" desc="通关条件" />
+</quests>
