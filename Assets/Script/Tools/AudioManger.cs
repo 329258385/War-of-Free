@@ -191,7 +191,7 @@ public class AudioManger : Singleton<AudioManger>
 		}
 
         nowPlayAudioBG = audio;
-		Coroutine.Start (PlayAudioBGA(audio, volume));
+		CoroutineMono.Start (PlayAudioBGA(audio, volume));
 
 	}
 

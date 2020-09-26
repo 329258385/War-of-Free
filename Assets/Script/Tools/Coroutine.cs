@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Coroutine : MonoBehaviour {
+public class CoroutineMono : MonoBehaviour {
 
 	public int maxRunningCoroutine = 5;
 
-	private static Coroutine coroutine;
+	private static CoroutineMono coroutine;
 	private int nowRunningCount = 0;
 	private Queue<IEnumerator> enumeratorQueue;
 

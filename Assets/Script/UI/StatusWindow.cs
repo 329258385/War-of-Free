@@ -138,7 +138,7 @@ public class StatusWindow : BaseWindow
 				ts.PlayReverse();	
 			});
 
-			Coroutine.Start (UpdateGoldCoroutine());
+			CoroutineMono.Start (UpdateGoldCoroutine());
 		}
 
 		int oldJewel = int.Parse (jewelLabel.text);
@@ -154,7 +154,7 @@ public class StatusWindow : BaseWindow
 				ts.PlayReverse();	
 			});
 
-			Coroutine.Start (UpdateJewelCoroutine());
+			CoroutineMono.Start (UpdateJewelCoroutine());
 		}
 
 		

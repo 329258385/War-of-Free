@@ -328,6 +328,6 @@ public class SettingWindow : BaseWindow
 
     public void OnClickNoticeback()
     {
-        Coroutine.Start(UpdateSystem.Instance.RequestHttpNotice());
+        CoroutineMono.Start(UpdateSystem.Instance.RequestHttpNotice());
     }
 }

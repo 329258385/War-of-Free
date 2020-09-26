@@ -15,7 +15,7 @@ public class NetTexture : MonoBehaviour
 		set
 		{
 			url = value;
-			Coroutine.Start (SetUrl ());
+			CoroutineMono.Start (SetUrl ());
 		}
 	}
 
@@ -38,7 +38,7 @@ public class NetTexture : MonoBehaviour
 
 	void Start ()
 	{
-		Coroutine.Start (SetUrl ());
+		CoroutineMono.Start (SetUrl ());
 	}
 
 	void OnDestroy ()

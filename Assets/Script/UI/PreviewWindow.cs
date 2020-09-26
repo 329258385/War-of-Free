@@ -58,7 +58,7 @@ public class PreviewWindow : BaseWindow
 			// 隐藏战斗的节点
 			BattleSystem.Instance.battleData.root.SetActive(false);
 
-			Coroutine.Start (SetInfo());
+			CoroutineMono.Start (SetInfo());
 
 		} else {
 

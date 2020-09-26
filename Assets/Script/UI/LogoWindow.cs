@@ -147,7 +147,7 @@ public class LogoWindow : BaseWindow
                 loadingTip.text += string.Format(LanguageDataProvider.GetValue(305), versionCount);
                 progressInterval = 0.5f / versionCount;
                 SetProgress(0.1f);
-                Coroutine.Start(UpdateSystem.Get().StartUpdate());
+                CoroutineMono.Start(UpdateSystem.Get().StartUpdate());
             }
         }
         else if (eventId == EventId.OnPackageUpdate)
@@ -224,7 +224,7 @@ public class LogoWindow : BaseWindow
         }
         else if (eventId == EventId.OnSDKLoginResult)
         {
-            Coroutine.Start(LoginServer());
+            CoroutineMono.Start(LoginServer());
         }
 
         else if (eventId == EventId.UpdateChaptersView)
@@ -292,7 +292,7 @@ public class LogoWindow : BaseWindow
     /// </summary>
     private void RequestOfflineNotice()
     {
-        Coroutine.Start(UpdateSystem.Instance.RequestHttpNotice());
+        CoroutineMono.Start(UpdateSystem.Instance.RequestHttpNotice());
     }
 
     /// <summary>
