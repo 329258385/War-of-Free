@@ -1,0 +1,1853 @@
+syntax="proto2";
+
+package NetMessage;
+
+enum MsgId
+{
+    ID_Null          = 0;        // 开始匹配
+    ID_CSMatch          = 1;        // 开始匹配
+    ID_SCMatch          = 2;        
+    ID_SCStartBattle    = 6;        // 开始战斗
+    ID_CSFrame          = 7;        // 帧
+    ID_SCFrame          = 8;        
+    ID_CSFinishBattle   = 9;        // 战斗结束
+    ID_SCFinishBattle   = 10;       // 
+    // ------------------------------------------------------------
+    ID_CSGetUserData    = 11;       // 获取玩家数据
+    ID_SCGetUserData    = 12;       
+    ID_CSCreateUserData = 13;       // 创建玩家数据
+    ID_SCCreateUserData = 14;
+    ID_CSSetIcon        = 15;       // 设置图标
+    ID_SCErrCode        = 18;       // 通用错误码
+    ID_SCSyncUserData   = 20;       // 同步玩家数据
+    // ------------------------------------------------------------
+    ID_SCMatchFail      = 22;       // 匹配失败
+    ID_CSPing           = 23;       // ping
+    ID_SCPong           = 24;       // pong
+    // ------------------------------------------------------------
+    ID_CSLoadRank       = 25;       // 加载排行榜
+    ID_SCLoadRank       = 26;       // 加载排行榜
+    ID_SCReady          = 28;       // 开始战斗前准备结束
+
+    // 地图------------------------------------------------------------
+    ID_CSMapSave        = 29;       // 保存
+    ID_CSMapDel         = 31;       // 删除
+    ID_CSMapLoad        = 33;       // 加载
+    ID_SCMapLoad        = 34;       // 加载
+    ID_CSMapMark        = 35;       // 打分
+
+    // 好友------------------------------------------------------------
+    ID_CSFriendFollow   = 37;       // 关注好友
+    ID_SCFriendFollow   = 38;       // 关注好友
+    ID_CSFriendLoad     = 39;       // 获取关注列表
+    ID_SCFriendLoad     = 40;       // 获取关注列表Load
+    ID_SCFriendNotify   = 42;       // 被关注通知
+    ID_CSFriendRecommend= 43;       // 推荐列表
+    ID_SCFriendRecommend= 44;       // 推荐列表
+    ID_CSFriendSearch   = 45;       // 查找玩家
+    ID_SCFriendSearch   = 46;       // 查找玩家
+
+    // referee ----------------------------------------------
+    ID_SCRefereeReq     = 47;       // 裁判请求
+    ID_CSRefereeRep     = 48;       // 裁判响应
+    ID_SCRefereeStop    = 50;       // 关闭裁判机
+
+    // battle report ----------------------------------------
+    ID_CSBattleReportLoad = 51;     // 加载战报
+    ID_SCBattleReportLoad = 52;     // 加载战报
+    ID_CSBattleReportPlay = 53;     // 播放战报
+    ID_SCBattleReportPlay = 54;     // 播放战报
+    ID_CSBattleResume     = 57;     // 恢复战斗
+    ID_SCBattleResume     = 58;     // 恢复战斗
+	
+	// team battle ----------------------------------------------
+	ID_SCTeamUpdate			= 60; // 更新队伍
+	ID_CSTeamCreate			= 61; // 创建队伍. 成功ID_SCTeamUpdate, 失败ID_SCTeamCreateFailed
+	ID_SCTeamCreate			= 62; //
+	ID_CSTeamInvite			= 63; // 邀请好友. 反馈ID_SCTeamInvite
+	ID_SCTeamInvite			= 64; // 
+	ID_CSTeamLeave			= 65; // 离开或解散队伍. 离开反馈ID_SCTeamUpdate, 解散反馈ID_SCTeamDel
+	ID_SCTeamDel			= 66; // 解散队伍反馈
+	ID_CSTeamStart			= 67; // 开始匹配
+	ID_SCTeamStart			= 68;
+	ID_SCTeamInviteReq		= 70; // 转发请求到被邀请人
+	ID_CSTeamInviteResp		= 71; // 被邀请人反馈
+	ID_SCTeamInviteResp		= 72;
+
+	// league ----------------------------------------------
+    ID_CSGetLeagueInfo      = 80; // 获得锦标赛详情
+    ID_SCGetLeagueInfo      = 81; // 获得锦标赛详情
+    ID_CSLeagueList         = 82; // 获得锦标赛列表
+    ID_SCLeagueList         = 83; // 获得锦标赛列表
+    ID_CSLeagueAdd          = 84; // 加入锦标赛
+    ID_SCLeagueAdd          = 85; // 加入锦标赛
+    ID_CSLeagueRank         = 86; // 获得锦标赛排名
+    ID_SCLeagueRank         = 87; // 获得锦标赛排名
+    ID_CSLeagueMatch        = 88; // 锦标赛匹配
+    ID_SCLeagueMatch        = 89; // 锦标赛匹配
+
+    // battle
+    ID_CSQuitBattle         = 90; // 退出战斗
+    ID_SCQuitBattle         = 91; // 退出战斗
+
+    // room
+    ID_CSWatchRooms         = 92; // 获得关注列表
+    ID_SCWatchRooms         = 93; // 获得关注列表
+    ID_CSJoinRoom           = 94; // 进入房间
+    ID_SCJoinRoom           = 95; // 进入房间
+    ID_CSCreateRoom         = 96; // 创建房间
+    ID_SCCreateRoom         = 97; // 创建房间
+    ID_CSQuitRoom           = 98; // 退出房间
+    ID_SCQuitRoom           = 99; // 退出房间
+    ID_SCRoomRefresh        = 101; // 退出房间
+    ID_SCRoomListRefresh    = 103; // 获得房间列表
+    ID_CSUnWatchRooms       = 104; // 清空关注列表
+    ID_SCUnWatchRooms       = 105; // 清空关注列表
+
+    // match2
+    ID_SCMatch2CurNum       = 107; // match2 的索引
+    ID_CSStartMatch2        = 108; // 开始匹配
+    ID_SCStartMatch2        = 109; // 开始匹配
+
+    // match3
+    ID_CSStartMatch3        = 110; // 开始匹配
+    ID_SCStartMatch3        = 111; // 开始匹配
+    ID_SCMatch3Notify       = 113; // 匹配通知
+    ID_CSChangeRace         = 114; // 改变种族
+    ID_SCChangeRace         = 115; // 改变种族
+    ID_SCSelectRaceNotify   = 117; // 方面通知
+
+    // race
+    ID_CSGetRaceData        = 118; // 获取种族数据
+    ID_SCGetRaceData        = 119; // 获取种族数据
+    ID_CSRaceSkillLevelUp   = 120; // 种族技能升级
+    ID_SCRaceSkillLevelUp   = 121; // 种族技能升级
+
+    // pack
+    ID_SCPackUpdate         = 123; // 背包更新
+
+    // gmcmd
+    ID_CSGMCmd              = 124; // gm
+
+    // 宝箱
+    ID_CSUnlockChest        = 126;
+    ID_SCUnlockChest        = 127;
+    ID_CSGainChest          = 128;
+    ID_SCGainChest          = 129;
+
+    // 种族
+    ID_SCStartSelectRace    = 131;
+
+    ID_CSGainTimerChest     = 132;
+    ID_SCGainTimerChest     = 133;
+    ID_CSGainBattleChest    = 134;
+    ID_SCGainBattleChest    = 135;
+
+    // 获得宝箱
+    ID_SCAddChest           = 137;
+
+    // 单机匹配
+    ID_CSSingleMatch        = 138;
+    ID_SCSingleMatch        = 139;
+
+    // 商城
+    ID_CSMallOpen           = 140;
+    ID_SCMallAll            = 141;
+    ID_CSMallBoxBuy         = 142;
+    ID_SCMallBoxBuy         = 143;
+    ID_CSMallJewelBuy       = 144;
+    ID_SCMallJewelBuy       = 145;
+    ID_SCUpdateBattleChest  = 147;
+    ID_SCUpdateTimerChest   = 149;
+
+    // match 4
+    ID_CSStartMatch4        = 150;
+    ID_SCStartMatch4        = 151;
+    ID_SCMatch4Info         = 153;
+
+    // commit race 
+    ID_CSCommitRace         = 154; 
+    ID_SCCommitRace         = 155; 
+
+	// rename
+	ID_CSRename				= 156;
+	ID_SCRename				= 157;
+
+	// rename
+	ID_CSSetCurLevel		= 158;
+	ID_SCSetCurLevel		= 159;
+
+	// rename
+	ID_CSLog				= 160;
+	ID_SCLog				= 161;
+
+	// race
+	ID_SCRaceNotify			= 163;
+
+	ID_CSClientStorageSet	= 164;
+	ID_SCClientStorageSet	= 165;
+	ID_CSClientStorageLoad	= 166;
+	ID_SCClientStorageLoad	= 167;
+	
+	ID_SCKickUserNtf		= 169;
+
+    ID_CSLeagueQuit        = 170; 
+    ID_SCLeagueQuit        = 171; 
+
+    ID_CSResume        		= 172; 
+    ID_SCResume        		= 173; 
+
+	// 通知
+	ID_SCNotify				= 175;
+
+	ID_CSStartMatchReq	 	= 176;	// 开始匹配
+	ID_SCStartMatchReq	 	= 177;	// 开始匹配
+	ID_SCMatchInit       	= 179;	// 匹配初始化
+	ID_SCMatchUpdate     	= 181;	// 更新匹配
+	ID_CSMatchComplete   	= 182;	// 结束匹配
+	ID_SCMatchComplete   	= 183;	// 结束匹配
+	ID_CSQuitMatch       	= 184;	// 退出匹配
+	ID_SCQuitMatch       	= 185;	// 退出匹配
+
+	ID_CSMailList			= 186;	// 邮件列表
+	ID_SCMailList           = 187;	// 邮件列表
+	ID_CSMailRead           = 188;	// 读邮件
+	ID_SCMailRead           = 189;	// 读邮件
+	ID_CSMailDel            = 190;	// 删除邮件
+	ID_SCMailDel            = 191;	// 删除邮件
+	ID_CSMailSend           = 192;	// 发邮件
+	ID_SCMailSend           = 193;	// 发邮件
+	ID_SCMailNotify         = 195;	// 新邮件通知
+
+	ID_CSMatchPos			= 196;	// 房间中移动位置
+	ID_SCMatchPos			= 197;	// 房间中移动位置
+
+	//ID_CSLoadLevelStar		= 198;
+	//ID_SCLoadLevelStar		= 199;
+	ID_CSSetLevelStar		= 200;
+	ID_SCSetLevelStar		= 201;
+	ID_CSStartLevel			= 202;
+	ID_SCStartLevel			= 203;
+	ID_SCIntAttr			= 205;
+	ID_SCStrAttr			= 207;
+	ID_CSLoadChapters		= 208;
+	ID_SCLoadChapters		= 209;
+	ID_CSLoadChapter		= 210;
+	ID_SCLoadChapter		= 211;
+}
+
+// ------------------------------------------------------------
+enum ErrCode {
+    EC_Null					= 0; // 未知错误
+    EC_SysUnknown			= -1; // 未知错误
+	EC_SysBusy				= -2;
+	EC_RedisOpFailed		= -3;
+	EC_Offline				= -4;
+	EC_InvalidMsg			= -5;
+	EC_OnBattle				= -6;
+	
+	EC_Ok                   = 1; // 成功
+    EC_MapSaveMaxMapCount   = 2; // 达到最大地图数量
+    EC_NoSuchMap            = 3; // 不存在这个地图
+    
+    EC_NoExist              = 5;
+    EC_AccountExist         = 6;
+    EC_NameExist            = 7;
+    EC_InvalidName          = 8;
+    EC_UserIsOnline         = 9; // 登录一个已经在线的玩家但是没有把这个玩家踢下去
+	
+	EC_TeamInviteRefuse		= 10;	// 拒绝邀请
+	EC_TeamDBParseFailed	= 13;
+	EC_TeamDBDataInvalid	= 14;
+	EC_TeamNoExist			= 15;
+	EC_TeamFull				= 16;
+
+    EC_MapExist             = 20;   // 创建一个已经存在的地图
+
+    EC_RefereeBusy          = 30;   // 裁判机忙碌
+	EC_InBattle				= 40;   // 正在战斗
+	EC_NeedResume			= 41;   // 需要恢复
+	EC_CanNotResume			= 42;   // 无法恢复
+
+    EC_LeagueIsFull         = 50;   // 锦标赛报名人数满了 
+    EC_LeagueLevelNotMatch  = 51;   // 阶不匹配     
+    EC_LeagueNotOpen        = 52;   // 不在开启时间  
+    EC_LeagueIn             = 53;   // 已经参加过锦标赛
+    EC_LeagueNotExist       = 54;   // 锦标赛不存在     
+    EC_LeagueNotIn          = 55;   // 没有参加锦标赛
+    EC_LeagueNotInMatchTime = 56;   // 不在匹配时间
+
+    EC_RoomNoExist          = 57;   // 房间不存在
+    EC_RoomAlreadyIn        = 58;   // 已经在房间中
+    EC_RoomInvalidMatch     = 59;   // 无效地图id
+    EC_RoomNotIn            = 60;   // 不在房间中
+    EC_RoomBattleState      = 61;   // 战斗状态
+
+    EC_RaceSkillIndexErr    = 62;   // 索引超限
+    EC_RaceSkillInvalidSkill= 63;   // 无效技能id
+    EC_RaceCostNotEnough    = 64;   // 资源不够
+	
+	EC_ChestUnlocking       = 70;  // 已有箱子在解锁
+	EC_ChestLocked          = 71;  // 还未解锁
+	EC_ChestLootSlotFull    = 72;  // 槽满
+	EC_ChestLootNothing     = 73;  // 未获得
+	EC_ChestNoExist			= 74;  // 钻石消耗不足
+	EC_ChestJewelNotEnough	= 75;  // 钻石消耗不足
+	EC_ChestTimeNotEnough	= 76;  // 签到宝箱时间不足
+	EC_ChestWinNumNotEnough	= 77;  // 胜利次数不足
+
+	EC_AccountTakenOver 	= 78;	// 账号在别处登录
+
+	EC_MatchIsFull			= 79;	// 匹配人满 
+	EC_MatchIsMember		= 80;	// 已经加入
+	EC_NotInMatch			= 81;	// 不在匹配中
+	EC_NotMaster			= 82;	// 不是房主
+	EC_RoomNotExist			= 83;	// 房间不存在
+	EC_PosInvalid			= 84;	// 无效位置
+
+	EC_NoSuchLevel			= 85;	// 没有这个关卡
+	EC_NoInChapter			= 86;	// 没在此章节
+	EC_NoDependLevel		= 87;	// 请完成之前的关卡
+	EC_PowerNotEnough		= 88;	// 体力不够
+}
+// ------------------------------------------------------------
+message Null
+{
+}
+
+// ------------------------------------------------------------
+
+// ------------------------------------------------------------
+message SCErrCode
+{
+    optional string gateway		= 99[default="to=client"];
+    required MsgId msg			= 1;  // 相关的客户端请求消息id
+    required ErrCode code		= 2;  // 错误码
+}
+
+enum BattleType 
+{
+	BT_Null = 0;
+    Melee = 1;  // 混战
+    Group2v2 = 2;  // 阵营2v2
+	Group3v3 = 3;  // 阵营3v3
+}
+
+message CSMatch
+{
+    optional string gateway		= 99[default="url=rand&set|to=match"];
+	optional string match_id	= 1;    // match id, if it's empty, server will match the game randomly
+    optional BattleType type	= 2;    // 类型
+}
+
+message SCMatch
+{
+    optional string gateway     = 99[default="to=client"];
+    required int32 count_down   = 3;  // 匹配失败倒计时
+}
+
+
+message CSTeamCreate
+{
+	optional string gateway		= 99[default="to=match"];
+	required BattleType type	= 1;
+}
+
+message SCTeamCreate
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+}
+
+message CSTeamInvite
+{
+	optional string gateway		= 99[default="to=match"];
+	required int32 userId 		= 2;
+}
+
+message SCTeamInvite
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+	required int32 userId = 2;
+}
+
+message SCTeamUpdate
+{
+	optional string gateway     = 99[default="to=client"];
+	required BattleType type = 1;
+	repeated UserData simUsers = 2;
+	required int32 version = 3;
+}
+
+message CSTeamLeave
+{
+	optional string gateway		= 99[default="to=match"];
+	required int32 leaderId 	= 1;
+}
+
+message SCTeamDel
+{
+	optional string gateway     = 99[default="to=client"];
+	required int32 leaderId = 1;
+	required ErrCode code = 2;
+}
+
+message CSTeamStart
+{
+	optional string gateway		= 99[default="to=match"];
+}
+
+message SCTeamStart
+{
+	optional string gateway     = 99[default="to=client"];
+	required int32 leaderId = 1;
+	required ErrCode code = 2;
+}
+
+message SCTeamInviteReq
+{
+	optional string gateway     = 99[default="to=client"];
+	required UserData leader = 1;
+	required BattleType type = 2;
+	required int32 timestamp = 3;
+}
+
+message CSTeamInviteResp 
+{
+	optional string gateway = 99[default="to=match"];
+	required int32 leaderId = 1;
+	required int32 timestamp = 2;
+	optional bool accept = 3;
+}
+
+message SCTeamInviteResp
+{
+	optional string gateway     = 99[default="to=client"];
+	required int32 userId =1; // 被邀请到玩家id
+	required ErrCode code = 2;
+}
+
+// battle ---------------------------------------------------
+message SCReady
+{
+    optional string gateway     =   99[default="url=set|to=client"];
+    required string match_id    =   1;
+    repeated UserData data      =   2;  // 战斗玩家数据
+	optional string group		=	3;	// 2v2例: "1,2|3,4"
+	optional int32	random_seed	=	4;	// random seed
+    optional int64 battleid     = 	6;    // 战斗id用来回放 
+	optional string misc_id		=	7;	// 联赛id
+	optional MatchType match_type	=	8;	// 匹配类型
+}
+
+message SCStartBattle
+{
+    optional string gateway     =   99[default="to=client"];
+}
+
+message PbFrame
+{
+	optional bytes	content 	=	1;	// frame content
+}
+
+message PbFrames
+{
+	repeated PbFrame frames 	=	1;	// frame array
+}
+
+message CSFrame
+{
+    optional string gateway     =   99[default="url=fix|to=battle"];
+	required PbFrame frame 		=	1;	// frame
+    optional string content     =   2;
+}
+
+message SCFrame
+{
+    optional string gateway     = 99[default="to=client"];
+	required int32 frameNum		=	1;	// frame number
+	repeated int32 users		=	2;	// index array
+	repeated PbFrames frames 	=	3;	// the array index is team id
+}
+
+message Result
+{
+    required int32 userid = 1;      // userid
+    required int32 kill_num = 2;    // 击杀数量
+    required int32 survive_num = 3; // 自己剩余飞船数
+}
+
+// 结束方式
+enum EndType {
+	ET_Dead = 0;	// 死亡
+	ET_Giveup = 1;	// 投降
+	ET_Win = 2;		// 胜利
+	ET_Timeout = 3;	// 超时
+
+}
+
+message EndEvent
+{
+    required int32 userid = 1;      // userid
+    required EndType end_type = 2; 	// 结束方式
+    required int32 end_frame = 3;   // 结束帧数
+	optional int32 end_destroy = 4;	// 摧毁数
+	optional int32 end_survive = 5;	// 幸存数
+}
+
+message CSFinishBattle
+{
+    optional string gateway     = 99[default="url=fix|to=battle"];
+
+    repeated Result results = 1;
+    optional string content = 2;
+}
+
+message SCFinishBattle
+{
+    optional string gateway     = 99[default="url=del|to=client"];
+
+    repeated int32 users        = 2;    // userid
+    repeated int32 score_mods   = 3;    // userid对应的得分变化
+    repeated PackItem rewards   = 4;
+
+    optional ChestItem chest    = 5;
+    optional ErrCode drop_code  = 6;
+    repeated int32 mvp_num   	= 7;    // mvp
+	repeated EndType end_type   = 8;
+	repeated int32 rank			= 9;
+}
+
+message CSQuitBattle
+{
+    optional string gateway = 99[default="url=fix|to=battle"];
+	repeated EndEvent events = 1;
+}
+
+message SCQuitBattle
+{
+    optional string gateway = 99[default="url=del|to=client"];
+    repeated int32 users        = 2;    // userid
+    repeated int32 score_mods   = 3;    // userid对应的得分变化
+    repeated PackItem rewards   = 4;
+
+    optional ChestItem chest    = 5;
+    optional ErrCode drop_code  = 6;
+}
+
+
+// ------------------------------------------------------------
+message RaceData
+{
+    // 战斗开始用
+    required int32 race         = 1;   // 当前种族
+    required int32 level        = 2;   // 等级 
+    repeated int32 skills       = 3;   // 种族技能
+    repeated bool skill_locks   = 4;   // lock
+    required bool race_lock     = 5;   //
+}
+
+enum CoinId
+{
+	CI_Null = 0;
+    Gold            = 1;    
+    Jewel           = 2;
+}
+
+message PackItem 
+{
+    required int32 itemid       = 1; // 物品id
+    required int32 num          = 2; // 物品数量
+}
+
+message Pack
+{
+    repeated PackItem items     = 1; // 物品
+}
+
+message ChestItem
+{
+    required int32 id       = 1;
+    required int64 timeout  = 2;
+    required int32 slot     = 3;
+    required int32 serial   = 4;
+}
+
+message Chests
+{
+    repeated ChestItem items        = 1;
+    required int64 chest_gainpoint  = 2;    // 时间点
+    required int64 chest_gainconsume= 3;    // 消耗
+    required int32 chest_winnum     = 4;    // 当前次数
+    required int32 chest_neednum    = 5;    // 需要次数
+    required int32 chest_timeboxid  = 6;    // 时间宝箱id
+    required int32 chest_winboxid   = 7;    // 胜利宝箱id
+}
+
+message UserData
+{
+    required int32 userid       = 1;    // userid
+    required string name        = 2;    // 昵称
+    required string icon        = 3;    // 头像的url
+    required int32 score        = 4;    
+    required int32 level        = 5;    // 等级
+
+    // 好友用
+    optional bool online        = 6;    // 是否在线
+	optional bool onBattle      = 7;
+
+    // 战报用
+    optional int32 score_mod    = 8;    // 分数改变 战报用
+    optional int32 destroy_num  = 9;    // 消灭飞船数 战报用
+    optional int32 survive_num  = 10;   // 剩余数量 战报用
+
+    optional RaceData battle_race = 11;
+
+    optional Pack pack          = 12;
+    optional Chests chest       = 13;
+
+	repeated int32 RaceUseCount = 14;
+	repeated int32 RaceWinCount = 15;
+
+	optional int32 battle_count = 16;   // 天梯战斗次数
+	optional int32 mvp_count    = 17;   // 天梯MVP次数
+}
+
+message CSGetUserData
+{
+    optional string gateway = 99[default="auth=1|payload=100|clr=userid|to=data"];
+    required string account = 1;      // 账号
+    optional string app_version = 2;  // 应用版本
+	optional string imei_md5 = 3;     // IMEI MD5
+	optional string channel = 4;      // 渠道ID
+	optional string device_model = 5; // 设备型号
+	optional string os_version = 6;   // 系统版本
+}
+
+message SCGetUserData
+{
+    optional string gateway = 99[default="auth=1|set=userid|to=client"];
+    required ErrCode errcode = 1;
+	optional UserData data	= 2;	// 用户数据
+    optional int32 now = 3;         // 服务器当前时间
+	optional string cur_level = 4;	// 单机版当前关卡
+	
+    repeated RaceData race = 5;
+}
+
+message CSCreateUserData
+{
+    optional string gateway = 99[default="auth=1|payload=100|clr=userid|to=data"];
+    required string account = 1;    // 账号
+    required string name    = 2;    // 昵称
+    required string icon    = 3;    // 头像url
+}
+
+message SCCreateUserData
+{
+    optional string gateway = 99[default="auth=1|set=userid|to=client"];
+    required ErrCode errcode = 1;
+    optional UserData data  = 2;
+}
+
+message CSSetIcon 
+{
+    optional string gateway = 99[default="to=data"];
+    required string icon = 1;   // 头像url
+}
+
+message SCSyncUserData
+{
+    optional string gateway = 99[default="to=client"];
+    required UserData data = 1;
+}
+
+message SCMatchFail 
+{
+    optional string gateway = 99[default="url=del|to=client"];
+	optional ErrCode code = 1;
+}
+message CSPing 
+{
+    optional string gateway = 99[default="auth=1|to=self"];
+
+    required int64 timestamp = 1;
+    optional int32 type = 2;     // gw0,au1,lobby2,room3
+    optional int32 serial = 3;   // 序列号
+}
+message SCPong 
+{
+    optional string gateway = 99[default="auth=1|to=client"];
+    required int64 timestamp = 1;
+    optional int32 serial = 2;   // 序列号
+}
+
+message CSLoadRank
+{
+    optional string gateway = 99[default="payload=500|to=data"];
+    required int32 start = 1;   // 开始
+}
+
+message SCLoadRank
+{
+    optional string gateway = 99[default="to=client"];
+    required int32 self = 1;    // 自己排名
+    required int32 start = 2;   // 开始
+    repeated UserData data = 3;   // 名字
+}
+
+message PbSCFrames 
+{
+    optional SCReady ready          = 1;
+    optional SCStartBattle start    = 2;
+    repeated SCFrame frames         = 3;
+	optional SCFinishBattle finish	= 4;
+}
+// 地图------------------------------------------------------------
+message Map
+{
+    required string data    = 1;    // 地图数据
+    required int32 owner    = 2;    // 拥有者
+    required int32 mapid    = 3;    // 地图id
+    repeated int32 mark     = 4;    // 点赞userid
+    required int32 usecount = 5;    // 使用次数
+}
+
+// 创建
+message CSMapCreate
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required string data    = 1;
+}
+
+message SCMapCreate
+{
+    required int32 mapid    = 1;
+    required ErrCode err    = 2;
+}
+
+// 保存
+message CSMapSave
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required int32 mapid    = 1;
+    required string data    = 2;
+}
+
+message SCMapSave
+{
+    required int32 mapid    = 1;
+    required ErrCode err    = 2;
+}
+
+// 点赞
+message CSMapMark
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required int32 mapid    = 1;
+    required string data    = 2;
+    required bool mark      = 3; // true 点赞 false 取消点赞
+}
+
+// 读取
+message CSMapLoad
+{
+    optional string gateway = 99[default="payload=500|to=data"];
+    enum Type {
+		T_Null = 0;
+        ByUniq      = 1;    // 通过拥有者和id指定
+        ByOwner     = 2;    // 通过拥有者指定，按修改时间排序
+        ByUseCound  = 3;    // 通过使用次数排序
+    }
+    required Type type      = 1;
+    required int32 begin    = 2; // 序号
+    optional int32 owner    = 3;
+    optional int32 mapid    = 4; 
+}
+
+message SCMapLoad
+{
+    optional string gateway = 99[default="to=client"];
+    repeated Map map        = 1;
+    optional int32 begin    = 2; // 序号
+}
+
+// 删除
+message CSMapDel
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required int32 owner    = 1;
+    required int32 mapid    = 2;
+}
+
+// 好友------------------------------------------------------------
+// 关注好友
+message CSFriendFollow
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required int32 userid   = 1;    // 关注userid
+    required bool follow    = 2;    // false 就是取消关注
+}
+// 关注好
+message SCFriendFollow
+{
+    optional string gateway = 99[default="to=client"];
+    required int32 userid   = 1;
+    required bool follow    = 2;    // false就是取消关注
+	required UserData data  = 3;
+    required ErrCode err    = 4;
+}
+// 获取关注列
+message CSFriendLoad
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required int32 start    = 1;
+    required bool myfollow  = 2;    // 我的关注 true表示我关注的人，false关注我的人
+}
+// 获取关注列
+message SCFriendLoad
+{
+    optional string gateway         = 99[default="to=client"];
+    required int32 start            = 1;
+    required bool myfollow          = 2;    // 我的关注 true表示我关注的人，false关注我的人
+    repeated UserData data    = 3;
+    repeated bool follow_status     = 4;    // myfollow?表示是否关注了我:表示我是否关注了他
+}
+// 被关注通知
+message SCFriendNotify
+{
+    optional string gateway         = 99[default="to=client"];
+    required UserData data    = 1;
+    required bool follow            = 2;    // false表示取消关注
+}
+// 推荐列表
+message CSFriendRecommend
+{
+    optional string gateway         = 99[default="payload=200|to=data"];
+    required int32 start            = 1;
+}
+message SCFriendRecommend
+{
+    optional string gateway        = 99[default="to=client"];
+    required int32 start           = 1;
+    repeated UserData data   = 2;
+}
+// 搜索好友
+message CSFriendSearch
+{
+    optional string gateway = 99[default="payload=100|to=data"];
+    required int32 userid   = 1;    // 有userid，就用userid找,没有就用name找
+    required string name    = 2;
+}
+message SCFriendSearch
+{
+    optional string gateway        = 99[default="to=client"];
+    optional UserData data         = 1;
+    optional bool followed         = 2; // true 代表我已经关注他，false代表我没有关注他
+	optional int32 following_count = 3; // 关注数
+	optional int32 followers_count = 4; // 粉丝数
+}
+
+// 裁判机--------------------------------------------------------
+// 裁判机就绪
+message SCRefereeReq
+{
+}
+message CSRefereeRep
+{
+    required ErrCode code = 1;
+}
+// 关闭裁判机
+message SCRefereeStop
+{
+}
+
+// 战报--------------------------------------------------------
+// 战报
+message BattleReport
+{
+    required int64 id                   = 1;    // 战报id
+    repeated UserData data              = 2;    // 用于显示的玩家数据
+    required int32 play_count           = 3;    // 播放次数
+    optional string group               = 4;    // 分组
+    optional string match_id            = 5;    // 地图id
+    optional int64 time                 = 7;    // 战斗开始时间
+	repeated int32 rank					= 8;	// 排名
+	repeated EndType end_type			= 9;	// 结束事件
+}
+
+// 加载战报
+message CSBattleReportLoad
+{
+    optional string gateway = 99[default="payload=500|to=data"];
+    required bool self      = 1;    // true为自己的简报 false为热门战报
+    required int32 start    = 2;    // 开始位置
+}
+
+// 加载战报
+message SCBattleReportLoad
+{
+    optional string gateway      = 99[default="to=client"];
+    required bool self              = 1;    // true为自己的简报 false为热门战报
+    required int32 start            = 2;    // 开始位置
+    repeated BattleReport report    = 3;    // 战报
+}
+
+// 播放战报
+message CSBattleReportPlay
+{
+    optional string gateway = 99[default="payload=900|to=data"];
+    required int64 battleid = 1;    // 战报id
+}
+
+// 播放战报
+message SCBattleReportPlay
+{
+    optional string gateway      = 99[default="to=client"];
+    required PbSCFrames report = 1; // 战报
+}
+
+// 恢复战斗
+message CSBattleResume
+{
+    optional string gateway     =   99[default="url=fix|to=battle"];
+    required int32 startFrameNo = 1; // 开始的帧号
+}
+// 恢复战斗
+message SCBattleResume
+{
+    optional string gateway     =   99[default="to=client"];
+    required PbSCFrames report = 1; // 战报
+}
+
+
+// 观看直播----------------------------------------------------------------------
+// 直播列表
+message CSBattleCastList
+{
+    required int32 start = 1;
+}
+message SCBattleCastList
+{
+    required int32 start = 1;
+    repeated BattleReport report = 2; // 战报
+}
+
+// 开始观看 
+message CSBattleCastStartWatch
+{
+    required int64 battleid = 1;
+}
+message SCBattleCastStartWatch
+{
+    required int64 battleid = 1;
+    required ErrCode code = 2;
+}
+
+// 结束观看
+message CSBattleCastStopWatch
+{
+}
+message SCBattleCastStopWatch
+{
+    required ErrCode code = 1;
+}
+// 锦标赛----------------------------------------------------------------------
+// 锦标赛详情
+message LeagueInfo
+{
+    required string id = 1;          // id
+    required int32 max_num = 2;     // 最多人数
+    required int32 cur_num = 3;     // 当前人数
+    required string desc = 6;       // 描述
+
+    required int32 signup_start = 7;    // 开始时间
+    required int32 signup_finish = 8;   // 持续时间
+    required int32 league_start = 9;    // 开始时间
+    required int32 league_finish = 10;  // 持续时间
+    repeated int32 days = 11;        	// 战斗日期
+    required int32 combat_start = 12;   // 战斗时段开始
+    required int32 combat_finish = 13;  // 战斗时段结束
+}
+// 成员详情
+message MemberInfo
+{
+    required int32 id = 1;     // userid
+    required string name = 2;   // name
+    required string icon = 3;   // icon
+    required int32 score = 4;   // 积分
+    required int32 mvp = 5;     // mvp场数
+	required int32 battle_num = 6; // 战斗次数
+}
+// 获得锦标赛详情
+message CSGetLeagueInfo
+{
+    optional string gateway = 99[default="to=data"];
+}
+// 获得锦标赛详情
+message SCGetLeagueInfo
+{
+    optional string gateway = 99[default="to=client"];
+
+    required ErrCode code = 1;
+    optional LeagueInfo league = 2;
+    optional MemberInfo self = 3;
+}
+// 获得锦标赛列表
+message CSLeagueList
+{
+    optional string gateway = 99[default="to=data"];
+    required int32 start = 1;   // 开始索引
+}
+// 获得锦标赛列表
+message SCLeagueList
+{
+    optional string gateway = 99[default="to=client"];
+    required int32 start = 1;
+    repeated LeagueInfo league_info = 2;
+}
+// 加入锦标赛
+message CSLeagueAdd
+{
+    optional string gateway = 99[default="to=data"];
+    required string league_id = 1;
+}
+// 加入锦标赛
+message SCLeagueAdd
+{
+    optional string gateway = 99[default="to=client"];
+    required string league_id = 1;
+    required ErrCode code = 2;
+    optional LeagueInfo league = 3;
+    optional MemberInfo self = 4;
+}
+// 获得锦标赛排名
+message CSLeagueRank
+{
+    optional string gateway = 99[default="to=data"];
+    required string league_id = 1;
+    required int32 start = 2;
+}
+// 获得锦标赛排名
+message SCLeagueRank
+{
+    optional string gateway = 99[default="to=client"];
+    required string league_id = 1;
+    required int32 start = 2;
+    repeated MemberInfo members = 3;
+    optional MemberInfo self = 4;
+    optional int32 self_rank = 5;
+}
+// 锦标赛匹配
+message CSLeagueMatch
+{
+    optional string gateway = 99[default="to=data"];
+    required string league_id = 1;
+}
+// 锦标赛匹配
+message SCLeagueMatch
+{
+    optional string gateway = 99[default="to=client"];
+    required string league_id = 1;
+    required int32 count_down = 2;  // 匹配失败倒计时
+    required ErrCode code = 3;      // 错误码
+}
+
+// 退出锦标赛
+message CSLeagueQuit
+{
+    optional string gateway = 99[default="to=data"];
+}
+// 退出锦标赛
+message SCLeagueQuit
+{
+    optional string gateway = 99[default="to=client"];
+    required ErrCode code = 2;
+}
+// room ------------------------------------------------------------
+message RoomInfo 
+{
+    required int32 roomid = 1;      // 房间id
+    required string matchid = 2;    // 地图id
+    required int32 playernum = 3;   // 当前人数
+    //repeated UserData users = 3;    // 房间当前玩家
+}
+
+// 获得房间列表
+message CSWatchRooms
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+
+    required int32 playernum = 1;
+}
+message SCWatchRooms
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required int32 playernum = 1;
+    repeated RoomInfo rooms = 2;
+}
+message SCRoomListRefresh
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required int32 roomid = 1;
+    required int32 playernum = 2;
+}
+
+// 清空关注列表
+message CSUnWatchRooms
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+}
+
+// 清空关注列表
+message SCUnWatchRooms
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required ErrCode code = 1;
+}
+
+// 进入房间
+message CSJoinRoom
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+
+    required int32 roomid = 1;
+}
+message SCJoinRoom
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required int32 roomid = 1;
+    required ErrCode code = 2;
+    repeated UserData data = 3;
+    optional RoomInfo room = 4;
+}
+
+// 创建房间
+message CSCreateRoom
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+
+    required string matchid = 1;
+}
+message SCCreateRoom
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required string matchid = 1;
+    required ErrCode code = 2;
+    repeated UserData data = 3;
+    optional RoomInfo room = 4;
+}
+
+// 退出房间
+message CSQuitRoom
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+}
+message SCQuitRoom
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required ErrCode code = 2;
+}
+
+// 更新房间
+message SCRoomRefresh
+{
+    optional string gateway     = 99[default="to=client"];
+
+    required int32 roomid = 1;
+    repeated UserData data = 2;
+}
+
+// match2 -----------------------------------------------------------------
+// 打开界面
+message SCMatch2CurNum
+{
+    optional string gateway     = 99[default="to=client"];
+    required int32 playernum = 1;
+}
+// 开始匹配
+message CSStartMatch2 
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+}
+// 开始匹配
+message SCStartMatch2 
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+}
+// match3 -----------------------------------------------------------------
+// 打开界面
+// 开始匹配
+message CSStartMatch3
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+	optional bool hasRace = 1;
+}
+
+// 开始匹配
+message SCStartMatch3 
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+}
+
+// 变化
+message SCMatch3Notify
+{
+    optional string gateway     = 99[default="to=client"];
+    repeated UserData user = 1;
+    optional string matchid = 2;
+	repeated int32 useridx = 3;
+}
+
+// 改变种族
+message CSChangeRace
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+    required int32 race = 1;
+}
+
+// 改变种族
+message SCChangeRace
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+}
+
+// 确认种族
+message CSCommitRace
+{
+    optional string gateway		= 99[default="url=auto|to=match"];
+}
+
+// 确认种族
+message SCCommitRace
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+}
+
+// 开始选择种族
+message SCStartSelectRace
+{
+    optional string gateway     = 99[default="to=client"];
+
+    repeated RaceData races   = 1;
+}
+
+// 房间通知
+message SCSelectRaceNotify
+{
+    optional string gateway     = 99[default="to=client"];
+    repeated int32 user = 1;
+    repeated int32 race = 2;
+    repeated bool ok = 3;
+	repeated int32 useridx = 4;
+}
+
+// race skill ------------------------------------------------------
+message CSGetRaceData
+{
+    optional string gateway     = 99[default="to=data"];
+}
+message SCGetRaceData
+{
+    optional string gateway     = 99[default="to=client"];
+
+    repeated RaceData races   = 1;
+}
+// 修改属性
+message CSRaceSkillLevelUp
+{
+    optional string gateway = 99[default="to=data"];
+    required int32 cur_race = 1;    // index [1,5]
+    required int32 skill_index = 2; // index [1,6]
+}
+
+// 修改属性
+message SCRaceSkillLevelUp
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 98;
+
+    required int32 cur_race = 1;        // index [1,5]
+    required int32 skill_index = 2;     // index [1,6]
+    optional int32 new_skillid = 3;
+    optional int32 race_level = 4;      // 种族等级
+}
+
+// 背包改变
+message SCPackUpdate
+{
+    optional string gateway     = 99[default="to=client"];
+    
+    repeated PackItem modified  = 1;
+}
+
+// gm
+// money item use_card
+message CSGMCmd
+{
+    optional string gateway = 99[default="to=data"];
+    required string cmd = 1;
+}
+
+message SCAddChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required ChestItem added    = 1;
+}
+
+message CSUnlockChest
+{
+    optional string gateway = 99[default="to=data"];
+    required int32 slot = 1;
+}
+
+message SCUnlockChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code 	= 1;
+	required int32 slot 	= 2;
+	optional int32 time2unlock = 3;
+}
+
+message ItemChangeInfo 
+{
+	repeated PackItem items = 1;
+    repeated int32 skillids = 2;
+    repeated int32 add_num = 3;
+    repeated int32 levelup_num = 4;
+
+	repeated int32 unlock_race = 5;
+}
+
+message CSGainChest
+{
+    optional string gateway = 99[default="to=data"];
+    required int32 slot = 1;
+	optional bool use_jewel = 2;
+}
+
+message SCGainChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+	required int32 slot = 2;
+
+	//optional ItemChangeInfo change = 3;
+	repeated PackItem items = 3;
+    repeated int32 skillids = 4;
+    repeated int32 add_num = 5;
+    repeated int32 levelup_num = 6;
+
+	repeated int32 unlock_race = 7;
+}
+
+message CSGainTimerChest
+{
+    optional string gateway = 99[default="to=data"];
+}
+
+message SCGainTimerChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+    optional int64 time_out = 2;
+	//optional ItemChangeInfo change = 3;
+	repeated PackItem items = 3;
+    repeated int32 skillids = 4;
+    repeated int32 add_num = 5;
+    repeated int32 levelup_num = 6;
+
+	repeated int32 unlock_race = 7;
+}
+
+message CSGainBattleChest
+{
+    optional string gateway = 99[default="to=data"];
+}
+
+message SCGainBattleChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required ErrCode code = 1;
+    optional int64 num = 2;
+	//optional ItemChangeInfo change = 3;
+	repeated PackItem items = 3;
+    repeated int32 skillids = 4;
+    repeated int32 add_num = 5;
+    repeated int32 levelup_num = 6;
+
+	repeated int32 unlock_race = 7;
+}
+
+message SCUpdateBattleChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required int32 chest_winnum     = 1;
+}
+message SCUpdateTimerChest
+{
+    optional string gateway     = 99[default="to=client"];
+    required int64 chest_gainpoint  = 1;    // 时间点
+}
+
+// 单机匹配------------------------------------------------------
+message CSSingleMatch
+{
+    optional string gateway = 99[default="to=match"];
+    required string matchid = 1;
+}
+
+message SCSingleMatch
+{
+    optional string gateway = 99[default="to=client"];
+    required ErrCode code = 1;
+}
+message PbMallBox
+{
+	required int32 boxId = 1;
+	required int32 gold = 2;
+}
+
+message PbMallGold
+{
+	required int32 id = 1;
+	required int32 gold = 2;
+	required int32 jewel = 3;
+}
+
+message CSMallOpen
+{
+	optional string gateway     = 99[default="to=data"];
+}
+
+message SCMallAll
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+	repeated PbMallBox box = 2;
+	repeated PbMallGold gold = 3;
+}
+
+message CSMallBoxBuy
+{
+	optional string gateway     = 99[default="to=data"];
+	required int32 boxId = 1;
+}
+
+message SCMallBoxBuy
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+	required int32 boxId = 2;
+	//optional ItemChangeInfo change = 3;
+	repeated PackItem items = 3;
+    repeated int32 skillids = 4;
+    repeated int32 add_num = 5;
+    repeated int32 levelup_num = 6;
+
+	repeated int32 unlock_race = 7;
+}
+
+message CSMallJewelBuy
+{
+	optional string gateway     = 99[default="to=data"];
+	required int32 jewelId = 1;
+}
+
+message SCMallJewelBuy
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+	required int32 jewelId = 2;
+	repeated PackItem items = 3;
+	
+	repeated int32 add_num = 4;
+}
+
+message CSStartMatch4
+{
+    optional string gateway		= 99[default="url=rand&set|to=match"];
+}
+
+message SCStartMatch4
+{
+	optional string gateway     = 99[default="to=client"];
+    
+	required ErrCode code = 1;
+}
+
+message SCMatch4Info 
+{
+	optional string gateway     = 99[default="to=client"];
+
+    repeated UserData user = 1;
+}
+
+message CSRename
+{
+    optional string gateway		= 99[default="to=data"];
+	required string name = 1;
+}
+
+message SCRename
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+}
+
+message CSSetCurLevel
+{
+    optional string gateway		= 99[default="to=data"];
+	required string cur_level = 1;
+}
+
+message SCSetCurLevel
+{
+	optional string gateway     = 99[default="to=client"];
+	required string cur_level = 1;
+	required ErrCode code = 2;
+}
+message CSLog
+{
+	optional string gateway     = 99[default="to=self"];
+	required string name = 1;
+	required string log = 2;
+}
+message SCLog
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+}
+
+message SCRaceNotify
+{
+	optional string gateway     = 99[default="to=client"];
+	repeated int32 raceid = 1;
+}
+
+enum ClientStorageConst
+{
+	ClientStorageMinIndex = 0;		// 最小的索引
+	ClientStorageCurLevel = 1;
+	ClientStorageCurGuide = 2;
+	ClientStorageRedPoints = 3;
+	ClientStorageMaxIndex = 127;	// 最大的索引
+
+	ClientStorageMaxValueLen = 64;	// 最大的属性值长度
+}
+
+message CSClientStorageSet
+{
+	optional string gateway     = 99[default="to=self"];
+	repeated int32 index = 1;
+	repeated string value = 2;
+}
+
+message SCClientStorageSet
+{
+	optional string gateway     = 99[default="to=client"];
+	required ErrCode code = 1;
+	repeated int32 index = 2;
+	repeated string value = 3;
+}
+
+message CSClientStorageLoad
+{
+	optional string gateway     = 99[default="to=self"];
+}
+message SCClientStorageLoad
+{
+	optional string gateway     = 99[default="to=client"];
+	repeated string values = 1;
+}
+
+message CSResume
+{
+	optional string gateway     = 99[default="to=self"];
+	
+    optional int32 startFrameNo = 1; // 开始的帧号
+}
+
+message SCResume
+{
+	optional string gateway     = 99[default="to=client"];
+	optional ErrCode code = 1;
+
+	optional SCMatchInit match = 2;
+
+	optional SCStartSelectRace start = 3;
+	optional SCSelectRaceNotify notify = 4;
+
+    optional PbSCFrames report = 5; // 战报
+
+}
+
+message SCKickUserNtf {
+	required ErrCode code = 1;
+	required string device_model = 2;
+}
+
+enum NotifyType 
+{
+	NT_Numm = 0;
+	NT_Popup = 1;	// 弹窗
+	NT_Scroll = 2;	// 滚动
+	NT_Error = 3;	// 错误
+}
+
+message SCNotify 
+{
+	required NotifyType typ = 1;
+	repeated string sarg = 2; 
+	repeated int64 narg = 3;
+	required string text = 4;
+}
+
+// new match ------------------------------------------------------------------
+
+enum MatchType 
+{
+	MT_Null = 0;
+	MT_Ladder = 1;
+	MT_League = 2;
+	MT_Room = 3;
+}
+
+message CSStartMatchReq
+{
+	required MatchType typ = 1;
+	optional string misc_id = 2;
+	optional bool has_race = 3;
+}
+
+message SCStartMatchReq
+{
+	required MatchType typ = 1;
+    required ErrCode code = 2;
+}
+
+
+message SCMatchInit
+{
+	required MatchType typ = 1;	// MT_Ladder	MT_League	MT_Room
+
+    required string matchid = 2;
+	optional string miscid = 3;	// ""			leagueid	roomid
+
+    repeated UserData user = 4;
+	repeated int32 useridx = 5;
+
+	optional int32 masterid = 6;
+	optional int32 countdown = 7;
+}
+
+message SCMatchUpdate
+{
+	required MatchType typ = 1;
+
+    repeated UserData user_added = 2;
+	repeated int32 index_added = 3;
+	
+	repeated int32 index_deled = 4;
+	repeated bool kick = 6;
+
+	optional int32 masterid = 5;
+
+	repeated int32 change_from = 7;
+	repeated int32 change_to = 8;
+}
+
+message CSMatchComplete
+{
+}
+
+message SCMatchComplete
+{
+    required ErrCode code = 1;
+}
+
+message CSQuitMatch
+{
+	optional int32 userid = 1;
+}
+
+message SCQuitMatch 
+{
+	required MatchType typ = 1;
+    required ErrCode code = 2;
+}
+
+message CSMatchPos
+{
+	required int32 userid = 1;
+	required int32 index = 2;
+}
+
+message SCMatchPos
+{
+    required ErrCode code = 1;
+}
+
+enum MailType 
+{
+	MailT_Null = 0;
+	MailT_FriendFollow = 1;
+	MailT_User = 2;
+}
+
+message Mail
+{
+	required int32 mailid = 1;
+	required MailType typ = 2;
+	optional string subject = 3;
+	optional string content = 4;
+	optional int32 timestap = 5;
+	optional bool read = 6;
+	optional UserData sender = 7;
+	optional int32 senderid = 8;
+}
+
+message CSMailList
+{
+	optional int32 start = 1;
+}
+
+message SCMailList
+{
+	required ErrCode code = 1;
+	optional int32 start = 2;
+	repeated Mail mail = 3;
+}
+
+message CSMailRead
+{
+	required int32 mailid = 1;
+}
+
+message SCMailRead
+{
+	required ErrCode code = 1;
+}
+
+message CSMailDel
+{
+	repeated int32 mailid = 1;
+}
+
+message SCMailDel
+{
+	required ErrCode code = 1;
+}
+
+message CSMailSend
+{
+	required Mail mail = 1;
+	required int32 to_user = 2;
+}
+
+message SCMailSend
+{
+	required ErrCode code = 1;
+}
+
+message SCMailNotify
+{
+	required Mail mail = 1;
+}
+
+//message CSLoadLevelStar
+//{
+//	repeated string level_name = 1;
+//}
+//
+//message SCLoadLevelStar
+//{
+//	repeated string level_name = 1;
+//	repeated int32 star = 2;
+//}
+
+message CSSetLevelStar
+{
+	required string level_name = 1;
+	required int32 star = 2;
+}
+
+message SCSetLevelStar
+{
+	required ErrCode code = 1;
+	required string level_name = 2;
+	required int32 star = 3;
+	required string chapter_name = 4;
+}
+
+message CSStartLevel
+{
+	required string level_name = 1;
+}
+
+message SCStartLevel
+{
+	required ErrCode code = 1;
+	required string level_name = 2;
+}
+
+enum IntAttr
+{
+	IA_Begin = 0;
+	IA_Power = 0;
+	IA_End = 1;
+}
+
+message SCIntAttr
+{
+	repeated IntAttr attr = 1;
+	repeated int32 value = 2;
+}
+
+enum StrAttr
+{
+	SA_Begin = 0;
+	SA_LastLevel = 0;
+	SA_End = 1;
+}
+
+message SCStrAttr
+{
+	repeated StrAttr attr = 1;
+	repeated string value = 2;
+}
+
+message CSLoadChapters
+{
+	repeated string chapter = 1;
+}
+
+message SCLoadChapters
+{
+	repeated string chapter = 1;
+	repeated int32 star = 2;
+	repeated int32 finish_level_num = 3;
+}
+
+message CSLoadChapter
+{
+	required string chapter = 1;
+}
+
+message SCLoadChapter
+{
+	required string chapter = 1;
+	repeated string level = 2;
+	repeated int32 star = 3;
+}
